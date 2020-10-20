@@ -3,6 +3,16 @@
 import linebot from 'linebot'
 import dotenv  from 'dotenv'
 import axios   from 'axios';
+import schedule from 'node-schedule';
+
+const exhibitions = []
+const updateData = async () => {
+  const response = await axios.get('https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=8')
+  exhibitions = response.data
+}
+schedule.scheduleJob('* * 0 * * *', ()=>{
+  updateData()
+})
 
 dotenv.config()
 
@@ -18,13 +28,13 @@ bot.on('message', async event => {
     const res = await axios.get('https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=8')
     const text = event.message.text
     let reply = ''
-    for(const data of res.data) {
+    for(const data of exhibitions) {
       if(data.title === text){
         reply = data.showInfo[0].locationName 
         break
       }
     }
-    reply = (reply.length === 0) ? '沒資料啦' : reply
+    reply = (reply.length === 0) ? '哭哭沒資料啦' : reply
     event.reply(reply)
   } catch(error){
     event.reply('出現錯誤')
