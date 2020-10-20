@@ -20,11 +20,11 @@ bot.on('message', async event => {
     let reply = ''
     for(const data of res.data) {
       if(data.title === text){
-        reply = data.showInfo[0].locationName
+        reply = data.showInfo[0].locationName 
         break
       }
     }
-    reply = (reply.length === 0) ? '找不到資料' : reply
+    reply = (reply.length === 0) ? '沒資料啦' : reply
     event.reply(reply)
   } catch(error){
     event.reply('出現錯誤')
