@@ -19,7 +19,7 @@ bot.on('message', async event => {
     const text = event.message.text
     let reply = ''
     for(const data of res.data) {
-      if(data.title === text){
+      if(data.title.indexOf(text)){
         reply = data.showInfo[0].locationName 
         break
       }
