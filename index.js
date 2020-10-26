@@ -7,8 +7,13 @@ import schedule from 'node-schedule';
 
 const bikeLocations = []
 const updateData = async () => {
-  const response = await axios.get('https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json')
+  try{
+    const response = await axios.get('https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json')
   bikeLocations = response.data.retVal
+  }catch(err){
+    console.log(err);
+  }
+  
 }
 schedule.scheduleJob('10 * * * * *', ()=>{
   updateData()
