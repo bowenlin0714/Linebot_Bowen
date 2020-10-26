@@ -44,12 +44,12 @@ bot.on('message', async event => {
             text: bikeLocations[b].ar,
             actions: [{
               type: 'message',
-              label: '剩餘可借車位',
-              text: bikeLocations[b].sna + '剩餘可借車位'
+              label: '可借數量',
+              text: bikeLocations[b].sna + '可借數量'
             }, {
               type: 'message',
-              label: '剩餘可還車位',
-              text: bikeLocations[b].sna + '剩餘可還車位'
+              label: '可還數量',
+              text: bikeLocations[b].sna + '可還數量'
             },
             {
               type: 'message',
