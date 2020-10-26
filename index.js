@@ -5,7 +5,7 @@ import dotenv  from 'dotenv'
 import axios   from 'axios';
 import schedule from 'node-schedule';
 
-const bikeLocations = []
+let bikeLocations = []
 const updateData = async () => {
   try{
     const response = await axios.get('https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json')
