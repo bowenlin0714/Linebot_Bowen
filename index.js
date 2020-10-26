@@ -34,7 +34,7 @@ bot.on('message', async event => {
         break
       }
     }
-    reply = (reply.length === 0) ? '哭哭沒資料啦' : reply
+    reply = (reply.length === 0) ? '沒有資料' : reply
     event.reply(reply)
   } catch(error){
     event.reply('出現錯誤')
