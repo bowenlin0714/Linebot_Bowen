@@ -37,6 +37,9 @@ bot.on('message', async event => {
         reply = bikeLocations[b].sna
         break
       }
+      if(event.mesage.text==='使用'){
+        reply = 使用說明
+      }
     }
     reply = (reply.length === 0) ? '沒有資料' : reply
     event.reply(reply)
