@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./axios.min.js"></script>
+  <script>
+    axios.get('https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json').then(res=>{
+      let bikes = res.data.retVal
+      for(let b in bikes){
+        console.log(bikes[b].sna);
+      }
+      console.log(bikes);
+      console.log(res.data.retVal['0001'].sarea)
+    })
+    
+  </script>
+</body>
+</html>
