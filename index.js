@@ -5,12 +5,12 @@ import dotenv  from 'dotenv'
 import axios   from 'axios';
 import schedule from 'node-schedule';
 
-const exhibitions = []
+const bikeLocations = []
 const updateData = async () => {
-  const response = await axios.get('https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=8')
-  exhibitions = response.data
+  const response = await axios.get('https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json')
+  bikeLocations = response.data.retVal
 }
-schedule.scheduleJob('* * 0 * * *', ()=>{
+schedule.scheduleJob('10 * * * * *', ()=>{
   updateData()
 })
 
@@ -25,12 +25,11 @@ const bot = linebot({
 
 bot.on('message', async event => {
   try{
-    const res = await axios.get('https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=8')
     const text = event.message.text
     let reply = ''
-    for(const data of exhibitions) {
-      if(data.title === text){
-        reply = data.showInfo[0].locationName 
+    for(const b in bikeLocations) {
+      if(bikeLocations[b].sna.includes(event.message.text)){
+        reply = bikeLocations[b].sna
         break
       }
     }
